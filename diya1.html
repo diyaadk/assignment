@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Contact Form Example</title>
+</head<!DOCTYPE html>
+<html>
+<head>
+  <title>Contact Form with JavaScript Validation</title>
+  <style>
+
+    .error-message {
+      color: red;
+      font-size: 14px;
+    }
+  </style>
+  <script>
+    
+    function validateForm() {
+        
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
+    
+    
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+       
+        let isValid = true;
+    
+    
+        document.querySelectorAll('.error-message').forEach(element => {
+            element.textContent = '';
+        });
+    
+    
+        if (name === '') {
+            isValid = false;
+            document.getElementById('name-error').textContent = 'Please enter your name.';
+        }
+    
+        if (email === '') {
+            isValid = false;
+            document.getElementById('email-error').textContent = 'Please enter your email address.';
+        } else if (!emailRegex.test(email)) {
+            isValid = false;
+            document.getElementById('email-error').textContent = 'Please enter a valid email address.';
+        }
+    
+        if (message === '') {
+            isValid = false;
+            document.getElementById('message-error').textContent = 'Please enter your message.';
+        }
+        
+        if (isValid) {
+            console.log('Form submitted successfully.');
+            return true; 
+        }
+        
+        return false; 
+    }
+  </script>
+</head>
+<body>
+  <h1>Contact Us</h1>
+  <form action="submit.php" method="post" onsubmit="return validateForm()">
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name" required>
+    <div class="error-message" id="name-error"></div><br><br>
+    
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email" required>
+    <div class="error-message" id="email-error"></div><br><br>
+    
+    <label for="message">Message:</label><br>
+    <textarea id="message" name="message" rows="4" cols="50" required></textarea>
+    <div class="error-message" id="message-error"></div><br><br>
+    
+    <input type="submit" value="Submit" style="background-color: blue; color: white;"> 
+  </form>
+</body>
+</html>
